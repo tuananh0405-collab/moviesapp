@@ -47,5 +47,11 @@ public interface MovieAPI {
             @Query("page") int page
     );
 
+    @GET("movie/{category}")
+    Call<MovieResponse> getMoviesByCategory(
+            @Path("category") String category,
+//            @Query("api_key") String apiKey,
+            @Query("page") int page
+    );
 }
 

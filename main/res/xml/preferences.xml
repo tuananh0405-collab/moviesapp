@@ -1,0 +1,29 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Filter 1: Choose movie category -->
+    <ListPreference
+        android:defaultValue="popular"
+        android:entries="@array/movie_category_options"
+        android:entryValues="@array/movie_category_values"
+        android:key="filter_movie_category"
+        android:summary="Choose a category to filter movies"
+        android:title="Filter by Movie Category" />
+
+    <!-- Filter 2: Sort by option -->
+    <ListPreference
+        android:defaultValue="release_date"
+        android:entries="@array/sort_options"
+        android:entryValues="@array/sort_values"
+        android:key="sort_option"
+        android:summary="Choose how to sort the movie list"
+        android:title="Sort by" />
+
+    <!-- Filter 3: Number of pages per loading -->
+    <EditTextPreference
+        android:defaultValue="1"
+        android:inputType="number"
+        android:key="pages_per_loading"
+        android:summary="Set the number of pages to load at a time"
+        android:title="Number of Pages per Loading" />
+
+</PreferenceScreen>

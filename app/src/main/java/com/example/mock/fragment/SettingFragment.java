@@ -202,4 +202,9 @@ public class SettingFragment extends Fragment {
                 .show();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadPreferences();
+    }
 }

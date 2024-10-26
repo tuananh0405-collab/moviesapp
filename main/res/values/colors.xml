@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#3DA9FF</color>
+    <color name="colorPrimary">#45A2ED</color>
+    <color name="colorSecondary">#FF4081</color>
+    <color name="colorSecondaryVariant">#FF4081</color>
+    <color name="icons">#212121</color>
+    <color name="divider">#BDBDBD</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#F1F1F1</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="AliceBlue">#F0F8FF</color>
+    <color name="DarkGray">#A9A9A9</color>
+    <color name="White">#FFFFFF</color>
+
+</resources>

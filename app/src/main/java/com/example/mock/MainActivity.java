@@ -213,12 +213,13 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
 
             if (favoriteCount > 0) {
                 badgeDrawable.setVisible(true);
+                badgeDrawable.setNumber(favoriteCount);
 
-                if (favoriteCount > 9) {
-                    badgeDrawable.setText("9+");
-                } else {
-                    badgeDrawable.setNumber(favoriteCount);
-                }
+//                if (favoriteCount > 9) {
+//                    badgeDrawable.setText("9+");
+//                } else {
+//                    badgeDrawable.setNumber(favoriteCount);
+//                }
             } else {
                 badgeDrawable.setVisible(false);
             }

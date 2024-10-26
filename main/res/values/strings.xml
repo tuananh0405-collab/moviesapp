@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">"Mock project "</string>
+
+    <!-- Movie category options -->
+    <string-array name="movie_category_options">
+        <item>Popular Movies</item>
+        <item>Top Rated Movies</item>
+        <item>Upcoming Movies</item>
+        <item>Now Playing Movies</item>
+    </string-array>
+
+    <string-array name="movie_category_values">
+        <item>popular</item>
+        <item>top_rated</item>
+        <item>upcoming</item>
+        <item>now_playing</item>
+    </string-array>
+
+    <!-- Sort options -->
+    <string-array name="sort_options">
+        <item>Release Date</item>
+        <item>Rating</item>
+    </string-array>
+
+    <string-array name="sort_values">
+        <item>release_date</item>
+        <item>rating</item>
+    </string-array>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

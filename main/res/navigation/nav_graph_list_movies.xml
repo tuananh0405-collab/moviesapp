@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_list_movies"
+    app:startDestination="@id/listMoviesFragment">
+
+    <fragment
+        android:id="@+id/listMoviesFragment"
+        android:name="com.example.testmock.fragments.ListMoviesFragment"
+        android:label="Movies List"
+        tools:layout="@layout/fragment_list_movies">
+        <action
+            android:id="@+id/action_listMoviesFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.testmock.fragments.MovieDetailFragment"
+        android:label="Movie Details"
+        tools:layout="@layout/fragment_movie_details" />
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.testmock.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <fragment
+        android:id="@+id/remindersFragment"
+        android:name="com.example.testmock.fragments.RemindersFragment"
+        android:label="Reminders"
+        tools:layout="@layout/fragment_reminders" />
+</navigation>

@@ -229,22 +229,30 @@ public class MoviesFragment extends Fragment {
         isLoading = true;
 
         MovieAPI movieApi = ApiClient.getInstance().create(MovieAPI.class);
-        Call<MovieResponse> call;
+        String categoryPath;
+//        Call<MovieResponse> call;
 
         switch (selectedCategory) {
             case "Top Rated Movies":
-                call = movieApi.getTopRatedMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
+                categoryPath = "top_rated";
+//                call = movieApi.getTopRatedMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
                 break;
             case "Upcoming Movies":
-                call = movieApi.getUpcomingMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
+                categoryPath = "upcoming";
+//                call = movieApi.getUpcomingMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
                 break;
             case "Now Playing Movies":
-                call = movieApi.getNowPlayingMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
+                categoryPath = "now_playing";
+//                call = movieApi.getNowPlayingMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
                 break;
             default:
-                call = movieApi.getPopularMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
+                categoryPath = "popular";
+//                call = movieApi.getPopularMovies("e7631ffcb8e766993e5ec0c1f4245f93", page);
                 break;
         }
+
+        Call<MovieResponse> call = movieApi.getMoviesByCategory(categoryPath, page);
+
 
         call.enqueue(new Callback<MovieResponse>() {
             @Override
