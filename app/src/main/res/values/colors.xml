@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary colors -->
+    <color name="colorPrimary">#F0B90B</color>
+    <color name="colorPrimaryDark">#B8860B</color>
+    <color name="colorAccent">#F0B90B</color>
+
+    <!-- Background colors -->
+    <color name="colorBackground">#141414</color>
+    <color name="colorCardBackground">#1E1E1E</color>
+    <color name="colorOverlay">#262626</color>
+
+    <!-- Text colors -->
+    <color name="colorTextPrimary">#FFFFFF</color>
+    <color name="colorTextSecondary">#B3B3B3</color>
+    <color name="colorTextHint">#808080</color>
+
+    <!-- Button colors -->
+    <color name="colorButtonNormal">#F0B90B</color>
+    <color name="colorButtonPressed">#DDA00A</color>
+    <color name="colorButtonDisabled">#555555</color>
+
+    <!-- Rating colors -->
+    <color name="colorStar">#F0B90B</color>
+    <color name="colorStarDisabled">#D3D3D3</color>
+
+    <!-- Divider color -->
+    <color name="colorDivider">#4E4C4C</color>
+
+    <!-- Other custom colors -->
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorWarning">#FFC107</color>
+    <color name="colorError">#F44336</color>
+
+    <!-- Màu cho biểu tượng tab -->
+    <color name="colorTabIndicator">#EAEAEA</color>
+    <color name="colorTabIcon">#8028DBBC</color>
+    <color name="colorToolBar">#19191b</color>
+
+</resources>

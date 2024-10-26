@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/viewType"
+        android:icon="@drawable/ic_grid"
+        android:title=""
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/popularMovies"
+        android:title="Popular Movies"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/topRatedMovies"
+        android:title="Top Rated Movies"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/upcomingMovies"
+        android:title="Upcoming Movies"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/nowPlayingMovies"
+        android:title="Now Playing Movies"
+        app:showAsAction="never" />
+</menu>
