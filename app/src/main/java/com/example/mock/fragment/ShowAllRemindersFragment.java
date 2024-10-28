@@ -68,8 +68,9 @@ public class ShowAllRemindersFragment extends Fragment {
 
         Cursor cursor = alarmDatabaseHelper.getAllAlarms();
         List<Reminder> reminders = new ArrayList<>();
+        int itemCount = 0;
 
-        while (cursor.moveToNext()) {
+        while (cursor.moveToNext() && itemCount < 10) {
             @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex("movie_id"));
 
             @SuppressLint("Range") String movieTitle = cursor.getString(cursor.getColumnIndex("title"));
@@ -80,6 +81,7 @@ public class ShowAllRemindersFragment extends Fragment {
             String formattedDateTime = new SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault()).format(new Date(dateTimeMillis));
 
             reminders.add(new Reminder(id, movieTitle, releaseDate, rating, formattedDateTime, posterPath));
+            itemCount++;
         }
 
         cursor.close();
@@ -92,6 +94,7 @@ public class ShowAllRemindersFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (getActivity() != null) {
+                    getActivity().getSupportFragmentManager().popBackStack();
                     getActivity().getSupportFragmentManager().beginTransaction().remove(ShowAllRemindersFragment.this).commit();
                     getActivity().findViewById(R.id.fragment_container).setVisibility(View.GONE);
 

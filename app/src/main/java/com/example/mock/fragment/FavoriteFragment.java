@@ -12,12 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mock.MainActivity;
 import com.example.mock.R;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,6 +47,7 @@ public class FavoriteFragment extends Fragment {
     private ListMovieAdapter adapter;
     private MovieDatabaseHelper dbHelper;
 
+    private FrameLayout fragment_containerF;
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvNoFavorites;
 
@@ -73,7 +76,8 @@ public class FavoriteFragment extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerViewFavorite);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        tvNoFavorites = view.findViewById(R.id.tvNoFavorites); // Tham chiếu TextView "No Favorites"
+        tvNoFavorites = view.findViewById(R.id.tvNoFavorites);
+        fragment_containerF = view.findViewById(R.id.fragment_containerF);
 
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -90,6 +94,15 @@ public class FavoriteFragment extends Fragment {
         adapter = new ListMovieAdapter(favoriteMovies, new ListMovieAdapter.OnMovieClickListener() {
             @Override
             public void onMovieClick(Movie movie) {
+                recyclerView.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
+                fragment_containerF.setVisibility(View.VISIBLE);
+
+                MovieDetailFragment detailFragment = MovieDetailFragment.newInstance(movie.getId());
+                requireActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_containerF, detailFragment)
+                        .addToBackStack(null)
+                        .commit();
             }
 
 //            @Override
@@ -109,6 +122,20 @@ checkNoFavorites(favoriteMovies);
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        requireActivity().getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            if (requireActivity().getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                recyclerView.setVisibility(View.VISIBLE);
+                swipeRefreshLayout.setVisibility(View.VISIBLE);
+                fragment_containerF.setVisibility(View.GONE);
+                setSwipeRefreshEnabled(true);
+            } else {
+                recyclerView.setVisibility(View.GONE);
+                swipeRefreshLayout.setVisibility(View.GONE);
+                fragment_containerF.setVisibility(View.VISIBLE);
+                setSwipeRefreshEnabled(false);
+            }
+        });
 
         MenuHost menuHost = requireActivity();
 
@@ -142,7 +169,11 @@ checkNoFavorites(favoriteMovies);
             }
         }, getViewLifecycleOwner(), Lifecycle.State.RESUMED);
     }
-
+    private void setSwipeRefreshEnabled(boolean enabled) {
+        if (swipeRefreshLayout != null) {
+            swipeRefreshLayout.setEnabled(enabled);
+        }
+    }
     private void filterFavoriteMovies(String query) {
         List<Movie> allFavoriteMovies = dbHelper.getAllFavoriteMovies();
         List<Movie> filteredMovies = new ArrayList<>();
@@ -169,6 +200,10 @@ checkNoFavorites(favoriteMovies);
     @Override
     public void onResume() {
         super.onResume();
+        recyclerView.setVisibility(View.VISIBLE);
+        swipeRefreshLayout.setVisibility(View.VISIBLE);
+        fragment_containerF.setVisibility(View.GONE);
+        setSwipeRefreshEnabled(true);
         refreshData();
     }
 

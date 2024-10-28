@@ -11,46 +11,37 @@ import retrofit2.http.Query;
 
 public interface MovieAPI {
 
-    @GET("movie/popular")
-    Call<MovieResponse> getPopularMovies(
-            @Query("api_key") String apiKey,
-            @Query("page") int page
-    );
+//    @GET("movie/{movie_id}")
+//    Call<Movie> getMovieDetails(
+//            @Path("movie_id") int movieId,
+//            @Query("api_key") String apiKey
+//    );
 
-    @GET("movie/{movie_id}")
+    @GET("movie/{movie_id}?api_key=e7631ffcb8e766993e5ec0c1f4245f93")
     Call<Movie> getMovieDetails(
-            @Path("movie_id") int movieId,
-            @Query("api_key") String apiKey
+            @Path("movie_id") int movieId
     );
 
-    @GET("movie/{movie_id}/credits")
+//    @GET("movie/{movie_id}/credits")
+//    Call<CastResponse> getMovieCredits(
+//            @Path("movie_id") int movieId,
+//            @Query("api_key") String apiKey
+//    );
+
+    @GET("movie/{movie_id}/credits?api_key=e7631ffcb8e766993e5ec0c1f4245f93")
     Call<CastResponse> getMovieCredits(
-            @Path("movie_id") int movieId,
-            @Query("api_key") String apiKey
+            @Path("movie_id") int movieId
     );
 
-    @GET("movie/top_rated")
-    Call<MovieResponse> getTopRatedMovies(
-            @Query("api_key") String apiKey,
-            @Query("page") int page
-    );
 
-    @GET("movie/upcoming")
-    Call<MovieResponse> getUpcomingMovies(
-            @Query("api_key") String apiKey,
-            @Query("page") int page
-    );
-
-    @GET("movie/now_playing")
-    Call<MovieResponse> getNowPlayingMovies(
-            @Query("api_key") String apiKey,
-            @Query("page") int page
-    );
-
-    @GET("movie/{category}")
+//    @GET("movie/{category}")
+//    Call<MovieResponse> getMoviesByCategory(
+//            @Path("category") String category,
+//            @Query("page") int page
+//    );
+    @GET("movie/{category}?api_key=e7631ffcb8e766993e5ec0c1f4245f93")
     Call<MovieResponse> getMoviesByCategory(
             @Path("category") String category,
-//            @Query("api_key") String apiKey,
             @Query("page") int page
     );
 }

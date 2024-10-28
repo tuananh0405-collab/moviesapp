@@ -34,6 +34,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import com.example.mock.MainActivity;
 import com.example.mock.R;
 import com.example.mock.model.User;
 
@@ -79,7 +80,6 @@ public class EditProfileFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

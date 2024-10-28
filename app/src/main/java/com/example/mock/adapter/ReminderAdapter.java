@@ -81,7 +81,7 @@ public class ReminderAdapter extends BaseAdapter {
             alarmDatabaseHelper.deleteAlarmByMovieId(movieId);
             reminders.remove(position);
             notifyDataSetChanged();
-            Toast.makeText(context, "Reminder deleted !", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Reminder deleted!", Toast.LENGTH_SHORT).show();
 
             if (refreshDrawerCallback != null) {
                 refreshDrawerCallback.run();

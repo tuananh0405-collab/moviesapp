@@ -29,6 +29,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mock.MainActivity;
 import com.example.mock.R;
 import com.example.mock.adapter.GridMovieAdapter;
 import com.example.mock.adapter.ListMovieAdapter;
@@ -74,8 +75,7 @@ public class MoviesFragment extends Fragment {
     private String selectedSort;
 
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private static final int LOAD_MORE_DELAY = 2000; // Delay time in milliseconds
-
+    private static final int LOAD_MORE_DELAY = 2000;
 
     public MoviesFragment() {
     }
@@ -95,7 +95,7 @@ public class MoviesFragment extends Fragment {
         progressBarLoadMore = view.findViewById(R.id.idPBLoadMore);
         recyclerView = view.findViewById(R.id.recyclerViewMovies);
         swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-        tvNoData = view.findViewById(R.id.tvNoData);  // Tham chiếu TextView "No Data"
+        tvNoData = view.findViewById(R.id.tvNoData);
 
 
         linearLayoutManager = new LinearLayoutManager(getContext());
@@ -118,9 +118,7 @@ public class MoviesFragment extends Fragment {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(1) && !isLoading && !isLastPage) {
                     currentPage++;
-//                    loadMovies(currentPage);
-// Use handler to add delay for load more functionality
-                            progressBarLoadMore.setVisibility(View.VISIBLE);
+                    progressBarLoadMore.setVisibility(View.VISIBLE);
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -131,10 +129,10 @@ public class MoviesFragment extends Fragment {
             }
         });
 
-        if(movieList.isEmpty()){
+        if (movieList.isEmpty()) {
             tvNoData.setVisibility(View.VISIBLE);
-
         }
+
         return view;
     }
 
@@ -342,6 +340,7 @@ public class MoviesFragment extends Fragment {
             menuItem.setIcon(R.drawable.ic_grid);
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();

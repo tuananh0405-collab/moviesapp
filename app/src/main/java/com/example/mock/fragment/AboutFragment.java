@@ -18,10 +18,9 @@ public class AboutFragment extends Fragment {
     public AboutFragment() {
     }
 
-    public static AboutFragment newInstance(String param1, String param2) {
+    public static AboutFragment newInstance() {
         AboutFragment fragment = new AboutFragment();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }

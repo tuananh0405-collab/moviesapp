@@ -221,7 +221,7 @@ public class MovieDetailFragment extends Fragment {
     private void loadMovieCredits() {
         MovieAPI movieApi = ApiClient.getInstance().create(MovieAPI.class);
 
-        Call<CastResponse> call = movieApi.getMovieCredits(movieId, API_KEY);
+        Call<CastResponse> call = movieApi.getMovieCredits(movieId);
 
         call.enqueue(new Callback<CastResponse>() {
             @Override
@@ -244,7 +244,7 @@ public class MovieDetailFragment extends Fragment {
     private void loadMovieDetails(View view) {
         MovieAPI movieApi = ApiClient.getInstance().create(MovieAPI.class);
 
-        Call<Movie> call = movieApi.getMovieDetails(movieId, API_KEY);
+        Call<Movie> call = movieApi.getMovieDetails(movieId);
 
         call.enqueue(new Callback<Movie>() {
             @Override

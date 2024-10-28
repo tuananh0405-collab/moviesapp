@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.example.mock.MainActivity;
 import com.example.mock.R;
 
 public class SettingFragment extends Fragment {

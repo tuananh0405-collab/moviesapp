@@ -75,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
 
     private MovieDatabaseHelper movieDatabaseHelper;
 
+    private String previousTitle;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,10 +152,20 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         drawer_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Lưu tiêu đề hiện tại
+                previousTitle = toolbar.getTitle().toString();
+
                 FrameLayout fragmentContainer = findViewById(R.id.fragment_container);
                 fragmentContainer.setVisibility(View.VISIBLE);
                 Fragment fragment = EditProfileFragment.newInstance(user);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, fragment)
+                        .addToBackStack(null)
+                        .commit();
+
+                // Đặt tiêu đề mới cho fragment ShowAllRemindersFragment
+                toolbar.setTitle("Edit Profile");
+
                 drawerLayout.closeDrawer(navigationView);
             }
         });
@@ -162,6 +175,9 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         showAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Lưu tiêu đề hiện tại
+                previousTitle = toolbar.getTitle().toString();
+
                 FrameLayout fragmentContainer = findViewById(R.id.fragment_container);
                 fragmentContainer.setVisibility(View.VISIBLE);
                 Fragment fragment = new ShowAllRemindersFragment();
@@ -169,6 +185,9 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
                         .replace(R.id.fragment_container, fragment)
                         .addToBackStack(null)
                         .commit();
+                // Đặt tiêu đề mới cho fragment ShowAllRemindersFragment
+                toolbar.setTitle("Reminders");
+
                 drawerLayout.closeDrawer(navigationView);
             }
         });
@@ -209,17 +228,12 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         TabLayout.Tab favoriteTab = tabLayout.getTabAt(1);
         if (favoriteTab != null) {
             BadgeDrawable badgeDrawable = favoriteTab.getOrCreateBadge();
+            badgeDrawable.setMaxNumber(9);
             int favoriteCount = movieDatabaseHelper.getAllFavoriteMovies().size();
 
             if (favoriteCount > 0) {
                 badgeDrawable.setVisible(true);
                 badgeDrawable.setNumber(favoriteCount);
-
-//                if (favoriteCount > 9) {
-//                    badgeDrawable.setText("9+");
-//                } else {
-//                    badgeDrawable.setNumber(favoriteCount);
-//                }
             } else {
                 badgeDrawable.setVisible(false);
             }
@@ -315,12 +329,10 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         AlarmDatabaseHelper alarmDatabaseHelper = new AlarmDatabaseHelper(this);
         Cursor cursor = alarmDatabaseHelper.getAllAlarms();
 
-        // Đặt các LinearLayout reminder
         LinearLayout reminderContainer1 = navigationView.getHeaderView(0).findViewById(R.id.reminder_container1);
         LinearLayout reminderContainer2 = navigationView.getHeaderView(0).findViewById(R.id.reminder_container2);
         LinearLayout reminderContainer3 = navigationView.getHeaderView(0).findViewById(R.id.reminder_container3);
 
-        // Đặt các TextView để hiển thị thông tin nhắc nhở
         TextView tvReminderContent1 = navigationView.getHeaderView(0).findViewById(R.id.tvReminderContent1);
         TextView tvReminderTime1 = navigationView.getHeaderView(0).findViewById(R.id.tvReminderTime1);
 
@@ -340,7 +352,6 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
 
             String reminderContent = String.format("%s - %s - %.1f/10", movieTitle, releaseDate, rating);
 
-            // Hiển thị các thông tin nhắc nhở vào các vị trí tương ứng
             if (count == 0) {
                 reminderContainer1.setVisibility(View.VISIBLE);
                 tvReminderContent1.setText(reminderContent);
@@ -364,12 +375,10 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         AlarmDatabaseHelper alarmDatabaseHelper = new AlarmDatabaseHelper(this);
         Cursor cursor = alarmDatabaseHelper.getAllAlarms();
 
-        // Đặt các LinearLayout reminder
         LinearLayout reminderContainer1 = navigationView.getHeaderView(0).findViewById(R.id.reminder_container1);
         LinearLayout reminderContainer2 = navigationView.getHeaderView(0).findViewById(R.id.reminder_container2);
         LinearLayout reminderContainer3 = navigationView.getHeaderView(0).findViewById(R.id.reminder_container3);
 
-        // Đặt các TextView để hiển thị thông tin nhắc nhở
         TextView tvReminderContent1 = navigationView.getHeaderView(0).findViewById(R.id.tvReminderContent1);
         TextView tvReminderTime1 = navigationView.getHeaderView(0).findViewById(R.id.tvReminderTime1);
 
@@ -379,7 +388,6 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         TextView tvReminderContent3 = navigationView.getHeaderView(0).findViewById(R.id.tvReminderContent3);
         TextView tvReminderTime3 = navigationView.getHeaderView(0).findViewById(R.id.tvReminderTime3);
 
-        // Đặt trạng thái ban đầu
         reminderContainer1.setVisibility(View.GONE);
         reminderContainer2.setVisibility(View.GONE);
         reminderContainer3.setVisibility(View.GONE);
@@ -394,7 +402,6 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
 
             String reminderContent = String.format("%s - %s - %.1f/10", movieTitle, releaseDate, rating);
 
-            // Hiển thị các thông tin nhắc nhở vào các vị trí tương ứng
             if (count == 0) {
                 reminderContainer1.setVisibility(View.VISIBLE);
                 tvReminderContent1.setText(reminderContent);
@@ -425,10 +432,8 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         if (intent != null && intent.getBooleanExtra("open_movie_detail", false)) {
             int movieId = intent.getIntExtra("movieId", -1);
             if (movieId != -1) {
-
                 adapter.setMovieId(String.valueOf(movieId));
                 viewPager.setAdapter(adapter);
-
                 viewPager.setCurrentItem(0, false);
             } else {
                 Log.d("START", "movieId is invalid or not received.");
@@ -436,6 +441,19 @@ public class MainActivity extends AppCompatActivity implements EditProfileFragme
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                FrameLayout fragmentContainer = findViewById(R.id.fragment_container);
+                fragmentContainer.setVisibility(View.GONE);
 
+                // Khôi phục tiêu đề ban đầu khi quay lại fragment trước đó
+                toolbar.setTitle(previousTitle);
+            } else {
 
+            }
+        });
+    }
 }

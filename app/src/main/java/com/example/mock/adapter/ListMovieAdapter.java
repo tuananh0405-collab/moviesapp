@@ -91,14 +91,14 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
                             ((FavoriteFragment.OnFavoriteChangeListener) context).onFavoriteChanged();
                         }
                         imageViewFavorite.setImageResource(R.drawable.ic_star);
-                        Toast.makeText(context, movie.getTitle() + " removed from favorites!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, movie.getTitle() + " removed from favorites!", Toast.LENGTH_SHORT).show();
                     } else {
                         dbHelper.addFavoriteMovie(movie);
                         if (context instanceof FavoriteFragment.OnFavoriteChangeListener) {
                             ((FavoriteFragment.OnFavoriteChangeListener) context).onFavoriteChanged();
                         }
                         imageViewFavorite.setImageResource(R.drawable.ic_star_filled);
-                        Toast.makeText(context, movie.getTitle() + " added to favorites!", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context, movie.getTitle() + " added to favorites!", Toast.LENGTH_SHORT).show();
                     }
 
 

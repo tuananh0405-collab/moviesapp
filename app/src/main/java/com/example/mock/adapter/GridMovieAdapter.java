@@ -34,7 +34,6 @@ public class GridMovieAdapter extends RecyclerView.Adapter<GridMovieAdapter.Grid
     @Override
     public GridViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_movie_grid, parent, false);
-        Log.d("GridMovieAdapter", "onCreateViewHolder called");
         return new GridViewHolder(view);
     }
 
