@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        app:key="category"
+        app:title="Category"
+        app:defaultValue="Popular Movies"
+        app:entries="@array/categories"
+        app:entryValues="@array/categories_values"
+        app:summary="%s"/>
+
+    <SeekBarPreference
+        app:key="rate"
+        app:title="Movies with rate from"
+        app:defaultValue="0"
+        app:min="0"
+        app:showSeekBarValue="true"
+        android:max="10" />
+
+    <EditTextPreference
+        app:key="number"
+        app:title="From Release Year"
+        app:useSimpleSummaryProvider="true" />
+
+
+    <ListPreference
+        app:key="sort"
+        app:title="Sort By"
+        app:defaultValue="Release Date"
+        app:entries="@array/sorts"
+        app:entryValues="@array/sorts_values"
+        app:summary="%s"/>
+</PreferenceScreen>

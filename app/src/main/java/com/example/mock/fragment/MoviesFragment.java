@@ -11,6 +11,7 @@ import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -207,12 +208,23 @@ public class MoviesFragment extends Fragment {
         }
     }
 
+//    private void loadFilterPreferences() {
+//        SharedPreferences preferences = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+//        selectedCategory = preferences.getString(KEY_CATEGORY, "Popular Movies");
+//        selectedRate = preferences.getInt(KEY_RATE, 0);
+//        selectedYear = preferences.getInt(KEY_YEAR, 2000);
+//        selectedSort = preferences.getString(KEY_SORT, "Release Date");
+//    }
+
     private void loadFilterPreferences() {
-        SharedPreferences preferences = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        selectedCategory = preferences.getString(KEY_CATEGORY, "Popular Movies");
-        selectedRate = preferences.getInt(KEY_RATE, 0);
-        selectedYear = preferences.getInt(KEY_YEAR, 2000);
-        selectedSort = preferences.getString(KEY_SORT, "Release Date");
+        selectedCategory = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("category", "Popular Movies");
+        selectedRate = PreferenceManager.getDefaultSharedPreferences(requireContext()).getInt("rate", 0);
+//    selectedYear = PreferenceManager.getDefaultSharedPreferences(requireContext()).getInt("year", 2000);
+        selectedSort = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("sort", "Release Date");
+
+        String num =  PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("number","0");
+        Log.d("TAG", num);
+        selectedYear = Integer.parseInt(num);
     }
 
     private void loadMovies(int page) {

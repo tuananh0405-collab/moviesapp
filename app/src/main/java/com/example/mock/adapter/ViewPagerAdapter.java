@@ -9,6 +9,7 @@ import com.example.mock.fragment.AboutFragment;
 import com.example.mock.fragment.FavoriteFragment;
 import com.example.mock.fragment.MovieDetailFragment;
 import com.example.mock.fragment.MoviesFragment;
+import com.example.mock.fragment.PreferenceSettingsFragment;
 import com.example.mock.fragment.SettingFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
@@ -38,7 +39,8 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return new FavoriteFragment();
             case 2:
-                return new SettingFragment();
+//                return new SettingFragment();
+                return new PreferenceSettingsFragment();
             case 3:
                 return new AboutFragment();
         }

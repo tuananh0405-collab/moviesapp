@@ -4,4 +4,29 @@
     <string name="nav_close">Close</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string-array name="categories">
+        <item>Popular Movies</item>
+        <item>Top Rated Movies</item>
+        <item>Upcoming Movies</item>
+        <item>Now Playing Movies</item>
+    </string-array>
+
+    <string-array name="categories_values">
+        <item>Popular Movies</item>
+        <item>Top Rated Movies</item>
+        <item>Upcoming Movies</item>
+        <item>Now Playing Movies</item>
+    </string-array>
+
+    <string-array name="sorts">
+        <item>Release Date</item>
+        <item>Rating</item>
+    </string-array>
+
+    <string-array name="sorts_values">
+        <item>release_date</item>
+        <item>rating</item>
+    </string-array>
 </resources>
