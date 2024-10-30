@@ -25,6 +25,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -51,6 +52,12 @@ public class FavoriteFragment extends Fragment {
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvNoFavorites;
 
+    private String selectedCategory;
+    private int selectedRate;
+    private int selectedYear;
+    private String selectedSort;
+
+
     public interface OnFavoriteChangeListener {
         void onFavoriteChanged();
     }
@@ -68,6 +75,16 @@ public class FavoriteFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    private void loadFilterPreferences() {
+        selectedCategory = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("category", "Popular Movies");
+        selectedRate = PreferenceManager.getDefaultSharedPreferences(requireContext()).getInt("rate", 0);
+        selectedSort = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("sort", "Release Date");
+
+        String num = PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("number", "0");
+        selectedYear = Integer.parseInt(num);
+    }
+
 
     @Nullable
     @Override
@@ -184,12 +201,31 @@ checkNoFavorites(favoriteMovies);
             }
         }
 
+
+
         adapter.updateMovies(filteredMovies);
     }
 
     public void refreshData() {
+        loadFilterPreferences();
         List<Movie> favoriteMovies = dbHelper.getAllFavoriteMovies();
+        favoriteMovies.removeIf(movie -> movie.getRating() < selectedRate);
 
+        favoriteMovies.removeIf(movie -> {
+            String releaseDate = movie.getReleaseDate();
+            int releaseYear = !releaseDate.isEmpty() ? Integer.parseInt(releaseDate.split("-")[0]) : 0;
+            return releaseYear < selectedYear;
+        });
+
+        if ("Rating".equals(selectedSort)) {
+            favoriteMovies.sort((m1, m2) -> Float.compare(m2.getRating(), m1.getRating()));
+        } else if ("Release Date".equals(selectedSort)) {
+            favoriteMovies.sort((m1, m2) -> {
+                String date1 = m1.getReleaseDate();
+                String date2 = m2.getReleaseDate();
+                return date2.compareTo(date1);
+            });
+        }
         adapter.updateMovies(favoriteMovies);
 
         checkNoFavorites(favoriteMovies);

@@ -26,7 +26,7 @@
     </string-array>
 
     <string-array name="sorts_values">
-        <item>release_date</item>
-        <item>rating</item>
+        <item>Release Date</item>
+        <item>Rating</item>
     </string-array>
 </resources>
